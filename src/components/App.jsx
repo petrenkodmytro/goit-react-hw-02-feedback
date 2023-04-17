@@ -30,7 +30,6 @@ export class App extends Component {
   render() {
     return (
       <Layout>
-
         <Section title="Please leave feedback">
           <FeedbackOptions
             stateKeys={Object.keys(this.state)}
@@ -44,12 +43,13 @@ export class App extends Component {
             neutral={this.state.neutral}
             bad={this.state.bad}
             total={this.countTotalFeedback(this.state)}
-            positivePercentage={this.countPositiveFeedbackPercentage(this.state)}
+            positivePercentage={this.countPositiveFeedbackPercentage(
+              this.state
+            )}
           />
         </Section>
 
         <GlobalStyle />
-        
       </Layout>
     );
   }

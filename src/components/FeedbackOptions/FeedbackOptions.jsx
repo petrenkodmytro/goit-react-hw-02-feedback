@@ -11,7 +11,6 @@ export const FeedbackOptions = ({ stateKeys, onLeaveFeedback }) => {
           <FeedbackBtn
             key={stateKey}
             name={stateKey}
-            
             onClick={() => onLeaveFeedback(stateKey)}
           >
             {Icons[stateKey]}

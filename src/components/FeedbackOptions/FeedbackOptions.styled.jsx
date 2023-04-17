@@ -21,6 +21,7 @@ export const FeedbackBtn = styled.button`
   background-color: ${props => {
     return props.theme.colors.main; // из темы передаем цвет с помощью функции
   }};
+  transition: all 0.3s ease-in-out;
 
   :hover,
   :focus {
