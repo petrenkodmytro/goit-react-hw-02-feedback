@@ -1,6 +1,9 @@
 import { Component } from 'react';
 import { GlobalStyle } from './GlobalStyle';
 import { Layout } from './Layout/Layout';
+import { Section } from './Section/Section';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Statistics } from './Statistics/Statistics';
 
 export class App extends Component {
   // Стан застосунку
@@ -10,38 +13,43 @@ export class App extends Component {
     bad: 0,
   };
   // метод класу збору статистики
-  onLeaveFeedback = e => {
-    console.log(e);
+  onLeaveFeedback = stateKey => {
+    // console.log(stateKey); //знаходимо відповідну кнопку
+    this.setState(prevState => ({
+      [stateKey]: prevState[stateKey] + 1, //збільшуємо відповідне значення
+    }));
   };
   //метод класу загальної кількості зібраних відгуків з усіх категорій
   countTotalFeedback = ({ good, neutral, bad }) => good + neutral + bad;
   //метод классу відсоток позитивних відгуків
-  countPositiveFeedbackPercentage = ({ good, neutral, bad }) => {
+  countPositiveFeedbackPercentage = ({ good }) => {
     const TotalFeedback = this.countTotalFeedback(this.state);
-    return Math.round((good / TotalFeedback) * 100);
+    return Math.round((good / TotalFeedback) * 100) || 0; //або 0, щоб не було помилки в консолі
   };
 
   render() {
     return (
       <Layout>
-        <h2>Please leave feedback</h2>
-        <div>
-          <button name='good' onClick={this.onLeaveFeedback}>good</button>
-          <button>neutral</button>
-          <button>bad</button>
-        </div>
 
-        <h2>Statistics</h2>
-        <div>
-          <p>good</p>
-          <p>neutral</p>
-          <p>bad</p>
-          <p>Total</p>
-          <p>Positive feedback</p>
-          <p>There is no feedback</p>
-        </div>
+        <Section title="Please leave feedback">
+          <FeedbackOptions
+            stateKeys={Object.keys(this.state)}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
+        </Section>
+
+        <Section title="Statistics">
+          <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.countTotalFeedback(this.state)}
+            positivePercentage={this.countPositiveFeedbackPercentage(this.state)}
+          />
+        </Section>
 
         <GlobalStyle />
+        
       </Layout>
     );
   }
