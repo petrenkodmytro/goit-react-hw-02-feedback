@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes, { arrayOf } from 'prop-types';
 import { FeedbackWrap, FeedbackBtn } from './FeedbackOptions.styled';
-import {Icons} from './Icons'
+import { Icons } from './Icons';
 
 export const FeedbackOptions = ({ stateKeys, onLeaveFeedback }) => {
   return (
@@ -11,7 +11,7 @@ export const FeedbackOptions = ({ stateKeys, onLeaveFeedback }) => {
           <FeedbackBtn
             key={stateKey}
             name={stateKey}
-            onClick={() => onLeaveFeedback(stateKey)}
+            onClick={() => onLeaveFeedback(stateKey)} //анонимна фун-я
           >
             {Icons[stateKey]}
             {stateKey}

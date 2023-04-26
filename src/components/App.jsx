@@ -12,6 +12,7 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
+  
   // метод класу збору статистики
   onLeaveFeedback = stateKey => {
     // console.log(stateKey); //знаходимо відповідну кнопку
@@ -19,6 +20,17 @@ export class App extends Component {
       [stateKey]: prevState[stateKey] + 1, //збільшуємо відповідне значення
     }));
   };
+
+  // onLeaveFeedback = evt => {
+  //   const {
+  //     target: { name },
+  //   } = evt;
+  //   console.log({ name });
+  //   this.setState(prevState => {
+  //     return { [name]: prevState[name] + 1 };
+  //   });
+  // };
+
   //метод класу загальної кількості зібраних відгуків з усіх категорій
   countTotalFeedback = ({ good, neutral, bad }) => good + neutral + bad;
   //метод классу відсоток позитивних відгуків
